@@ -1,0 +1,11 @@
+# Ignore the active workspace layouts (prevents constant Git changes)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace
+
+# Ignore the Obsidian trash folder
+.Trash/
+
+# Ignore OS junk files
+.DS_Store
+Thumbs.db
