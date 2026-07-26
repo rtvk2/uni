@@ -1,5 +1,5 @@
 {
   "folder": "02-Calendar",
-  "template": "Daily",
+  "template": "02-Calendar/daily",
   "format": "YYYY-MM-DD (dddd)"
 }
