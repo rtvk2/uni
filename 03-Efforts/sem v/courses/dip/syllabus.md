@@ -7,7 +7,16 @@
 **L-T-P:** 3-0-1 *(L = Lecture hours, T = Tutorial hours, P = Practical hours)*  
 
 ---
-## Assessment Methods & Weightages
+## Assessment Methods & Weightages (Actual)
+
+| **Component**              | **Weightage** |
+| -------------------------- | ------------- |
+| Assignments / Homework (5) | 30%           |
+| Mid Term                   | 20%           |
+| Final Exam / Project       | 30%           |
+| Scheduled Quizzes (2)      | 20%           |
+
+## Assessment Methods & Weightages (Tentative)
 
 | Component                         | Marks   |
 | :-------------------------------- | :------ |

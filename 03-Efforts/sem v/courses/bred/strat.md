@@ -1,0 +1,1 @@
+rec class lecs, revisit slides; notes are ehhh but still need to take

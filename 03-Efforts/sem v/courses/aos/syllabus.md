@@ -8,8 +8,13 @@
 **L-T-P:** 3-1-0 *(L = Lecture hours, T = Tutorial hours, P = Practical hours)*  
 
 ---
-
-## Assessment Methods & Weightages
+## Assessment Methods & Weightages (Actual)
+| **OS Component**  | **Weight** | **Algo Component** | **Weight** |
+| ----------------- | ---------- | ------------------ | ---------- |
+| Mini Project      | 10%        | HW                 | 0%         |
+| Quiz 1            | 10%        | Lab Exams          | 20-30%     |
+| Mid Semester Exam | 30%        | End Semester Exam  | 20-30%     |
+## Assessment Methods & Weightages (Tentative)
 
 | Component                | Weightage |
 | :----------------------- | :-------- |

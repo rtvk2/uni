@@ -7,8 +7,26 @@
 **L-T-P:** 3-1-0 *(L = Lecture hours, T = Tutorial hours, P = Practical hours)*  
 
 ---
+## Assessment Methods & Weightages (Actual)
 
-## Assessment Methods & Weightages
+| **Component**                            | **Weight** |
+| ---------------------------------------- | ---------- |
+| Expt Participation (Cogsci Lab) + Report | 5%         |
+| Assignments (3)                          | 15%        |
+| In-class Quizzes (4)                     | 20%        |
+| Quizzes (2)                              | 20%        |
+| Mid-Sem                                  | 20%        |
+| Project (groups of 2)                    | 20%        |
+Project Details:
+- Design own study from scratch (might require pilot)
+- Create 2 versions, assess external validity, generalizability
+- Viva (groups of 4)
+- Mid Sept –
+	• mandatory TA meet
+	• project idea presentation
+	• RP Form
+- Early Nov – final presentation + viva
+## Assessment Methods & Weightages (Tentative)
 
 | Component                                        | Weightage         |
 | :----------------------------------------------- | :---------------- |
