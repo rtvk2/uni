@@ -338,3 +338,84 @@ Pillow is a versatile Python library used for opening, manipulating, and saving 
 | **Draw Curves** | `draw.arc(...)`, `draw.chord(...)`, `draw.pieslice(...)`| Draws curved shapes based on start/end angles within a bounding box. |
 | **Init Font** | `font = ImageFont.truetype('font.ttf', size=80)` | Loads a TTF font file for text drawing. |
 | **Draw Text** | `draw.text((x, y), "Text", fill="blue", font=font, align='center', anchor='mm')`| Writes text at `(x,y)`. `align` controls multiline alignment; `anchor` controls origin placement. |
+
+FT Quick Ref:
+
+### Core CTFT Pairs
+
+|**Signal x(t)**|**Transform X(jω)**|**Quick Derivation / Mental Trigger**|
+|---|---|---|
+|$\delta(t)$|$1$|$\int_{-\infty}^{\infty} \delta(t) e^{-j\omega t} dt$. The delta function sifts out the value at $t=0$, which is $e^0 = 1$.|
+|$1$|$2\pi\delta(\omega)$|**Duality:** If a pulse in time is flat in frequency, flat in time is a pulse in frequency.|
+|$e^{-at}u(t)$|$\frac{1}{a+j\omega}$|Direct integration of $\int_{0}^{\infty} e^{-t(a+j\omega)} dt$. Evaluates to $0 - (\frac{-1}{a+j\omega})$.|
+|$e^{-a\vert t\vert}$|$\frac{2a}{a^2+\omega^2}$|Split into causal $e^{-at}u(t)$ and anti-causal $e^{at}u(-t)$. Sum their transforms: $\frac{1}{a+j\omega} + \frac{1}{a-j\omega}$.|
+|$\text{sgn}(t)$|$\frac{2}{j\omega}$|Treat as the limit of $e^{-at}u(t) - e^{at}u(-t)$ as $a \to 0$. $\frac{1}{j\omega} - \frac{1}{-j\omega}$.|
+|$u(t)$|$\pi\delta(\omega) + \frac{1}{j\omega}$|Relate to $\text{sgn}(t)$: $u(t) = \frac{1}{2} + \frac{1}{2}\text{sgn}(t)$. Transform of $1/2$ gives the $\delta$, transform of $\text{sgn}/2$ gives the $1/j\omega$.|
+|$\text{rect}(t/\tau)$|$\tau \text{sinc}(\frac{\omega \tau}{2\pi})$|Direct integration of $1$ from $-\tau/2$ to $\tau/2$. Yields $\frac{2}{\omega}\sin(\omega\tau/2)$, which shapes into $\text{sinc}$.|
+|$\text{sinc}(Wt/\pi)$|$\text{rect}(\omega/2W)$|**Duality:** Since a box in time is a sinc in frequency, a sinc in time is a sharp box (ideal lowpass filter) in frequency.|
+|$\cos(\omega_0 t)$|$\pi[\delta(\omega-\omega_0) + \delta(\omega+\omega_0)]$|**Euler's:** $\frac{1}{2}(e^{j\omega_0 t} + e^{-j\omega_0 t})$. A complex exponential is just a shifted delta in frequency.|
+|$\sin(\omega_0 t)$|$\frac{\pi}{j}[\delta(\omega-\omega_0) - \delta(\omega+\omega_0)]$|**Euler's:** $\frac{1}{2j}(e^{j\omega_0 t} - e^{-j\omega_0 t})$. Same as cosine but with the imaginary scaling and phase inversion.|
+|$\sum_{n} \delta(t-nT)$|$\frac{2\pi}{T}\sum_{k} \delta(\omega - \frac{2\pi k}{T})$|Finding the Fourier Series of the impulse train yields coefficients $a_k = 1/T$. The transform is those coefficients as impulses.|
+|$e^{-at^2}$|$\sqrt{\frac{\pi}{a}} e^{-\omega^2/4a}$|**Self-duality:** Complete the square in the exponent of the Fourier integral. A Gaussian in time is always a Gaussian in frequency.|
+
+### Core DTFT Pairs
+
+|**Signal x[n]**|**Transform X(ejω)**|**Quick Derivation / Mental Trigger**|
+|---|---|---|
+|$\delta[n]$|$1$|Direct sum: $\sum \delta[n] e^{-j\omega n}$ only exists at $n=0$, which is $e^0 = 1$.|
+|$a^n u[n]$|$\frac{1}{1-ae^{-j\omega}}$|Infinite geometric series: $\sum_{n=0}^{\infty} (ae^{-j\omega})^n$. Converges using $\frac{1}{1-r}$ where $r = ae^{-j\omega}$.|
+|$1$|$2\pi\sum_k\delta(\omega-2\pi k)$|DTFT is always $2\pi$-periodic. A constant in time is an impulse at DC ($\omega=0$) that repeats every $2\pi$.|
+
+### The "Cheat Code" Properties
+
+|**Property**|**Formula**|**Why it makes sense (Intuition)**|
+|---|---|---|
+|**Time Shift**|$x(t-t_0) \leftrightarrow e^{-j\omega t_0}X(j\omega)$|Delaying a signal doesn't change its frequencies, it just adds a linear phase shift (spinning the phase angle proportional to frequency).|
+|**Frequency Shift**|$e^{j\omega_0 t}x(t) \leftrightarrow X(j(\omega-\omega_0))$|Multiplying by a carrier wave translates the entire spectrum up to that carrier frequency (the basis of all radio modulation).|
+|**Time Scaling**|$x(at) \leftrightarrow \frac{1}{\vert a \vert}X(j\frac{\omega}{a})$|Compressing a signal in time ($a>1$) requires faster transitions, which stretches the signal out in frequency.|
+|**Time Differentiation**|$\frac{dx(t)}{dt} \leftrightarrow j\omega X(j\omega)$|Taking a derivative highlights fast changes. Multiplying by $\omega$ acts as a high-pass filter, amplifying high frequencies.|
+|**Freq Differentiation**|$t x(t) \leftrightarrow j \frac{dX(j\omega)}{d\omega}$|The dual of time differentiation. Multiplying by $t$ ramps up the signal over time, causing sharper variations in the spectrum. (Crucial for deriving $t e^{-at}u(t)$).|
+|**Convolution**|$x(t) * y(t) \leftrightarrow X(j\omega)Y(j\omega)$|Filtering a signal in time is just scaling its individual frequency components up or down.|
+|**Multiplication**|$x(t)y(t) \leftrightarrow \frac{1}{2\pi}X(j\omega) * Y(j\omega)$|Windowing a signal in time blurs it in frequency (convolving with the window's spectrum).|
+
+### 2D Digital Image Processing: Core Functional Pairs
+
+|**Spatial Domain f(x,y)**|**Frequency Domain F(u,v)**|**DIP Application / Mental Trigger**|
+|---|---|---|
+|$\delta(x,y)$|$1$|A 2D spatial impulse contains every single spatial frequency equally.|
+|$1$|$MN \delta(u,v)$|A perfectly flat, featureless image is a massive DC component at the origin.|
+|$\cos(2\pi(u_0 x/M + v_0 y/N))$|$\frac{MN}{2} [\delta(u-u_0, v-v_0) + \delta(u+u_0, v+v_0)]$|Euler's formula in 2D. A spatial sine wave is two symmetric impulses in frequency.|
+|$\text{rect}(x/X, y/Y)$|$XY\text{sinc}(uX)\text{sinc}(vY)$|**Ideal Filtering.** A sharp rectangular cutoff in frequency creates a 2D sinc in space. This causes visible "ringing" (ripple artifacts) around edges.|
+|$\text{sinc}(x/X)\text{sinc}(y/Y)$|$XY\text{rect}(uX, vY)$|**Duality.** A sinc function in the spatial domain translates to a perfect rectangular window in the frequency domain.|
+|$e^{-(x^2+y^2)/2\sigma^2}$|$2\pi\sigma^2 e^{-2\pi^2\sigma^2(u^2+v^2)}$|**Gaussian Blurring.** A Gaussian is perfectly smooth and positive in both domains. Smooth in frequency means smooth in space—Gaussian filters never cause ringing.|
+|$\sum_m \sum_n \delta(x-m\Delta x, y-n\Delta y)$|$\frac{1}{\Delta x \Delta y} \sum_m \sum_n \delta(u-\frac{m}{\Delta x}, v-\frac{n}{\Delta y})$|**2D Sampling.** Multiplying an image by this grid in space creates infinite periodic copies of its spectrum in frequency. Aliasing occurs when these copies overlap.|
+
+### 2D DFT Properties & Manipulation
+
+|**Property**|**Spatial Domain**|**Frequency Domain**|**What it means / Why you care**|
+|---|---|---|---|
+|**Spatial Shift**|$f(x-x_0, y-y_0)$|$F(u,v) e^{-j2\pi(u x_0/M + v y_0/N)}$|Panning the image only shifts the phase. The magnitude spectrum remains identical.|
+|**Frequency Shift**|$f(x,y) e^{j2\pi(u_0 x/M + v_0 y/N)}$|$F(u-u_0, v-v_0)$|Multiplying by a 2D complex exponential shifts the entire frequency spectrum.|
+|**Centering the FFT**|$f(x,y)(-1)^{x+y}$|$F(u-M/2, v-N/2)$|Multiplying the image by a +1/-1 checkerboard shifts the DC component to the dead center of the frequency plot for visualization.|
+|**Rotation**|$f(r, \theta+\theta_0)$|$F(\omega, \phi+\theta_0)$|Rotating an image in the spatial domain rotates its frequency spectrum by the exact same angle.|
+|**2D Convolution**|$f(x,y) * h(x,y)$|$F(u,v)H(u,v)$|**Filtering.** Convolving a spatial filter mask is mathematically identical to multiplying their frequency representations.|
+|**2D Multiplication**|$f(x,y)h(x,y)$|$\frac{1}{MN} F(u,v) * H(u,v)$|**Windowing.** Multiplying an image by a window in space convolves (blurs) its frequency spectrum.|
+|**Separability**|$f(x)f(y)$|$F(u)F(v)$|**Optimization.** If a 2D function can be split into 1D x and y components, you can perform two fast 1D operations instead of one massive 2D operation.|
+
+### 2D Differential Properties (Edge Detection)
+
+|**Spatial Domain**|**Frequency Domain**|**DIP Application / Mental Trigger**|
+|---|---|---|
+|$\frac{\partial}{\partial x}f(x,y)$|$j2\pi u F(u,v)$|**Directional Edges.** A derivative in the x-direction highlights vertical edges. Acts as a highpass filter along the $u$-axis, zeroing out the DC component.|
+|$\frac{\partial}{\partial y}f(x,y)$|$j2\pi v F(u,v)$|**Directional Edges.** Same as above, but isolates horizontal edges by filtering along the $v$-axis.|
+|$\nabla^2 f(x,y)$|$-4\pi^2(u^2+v^2)F(u,v)$|**The Laplacian.** Isotropic (directionless) edge detection. The frequency multiplier $(u^2+v^2)$ is a parabolic highpass filter that amplifies fine detail and crushes flat areas.|
+
+### Image Transforms (Matrix-Based & Fourier-Related)
+
+|**Transform**|**Basis Functions**|**Engineering Use / Mental Trigger**|
+|---|---|---|
+|**Discrete Cosine (DCT)**|Cosines of varying frequencies|**Energy compaction.** Pushes almost all visual information into the top-left (low frequency) coefficients. The foundation of JPEG compression.|
+|**Walsh-Hadamard (WHT)**|Square waves (values +1, -1)|**Hardware speed.** Uses zero sines or cosines, just additions and subtractions. Extremely cheap to compute on raw hardware.|
+|**Haar Transform**|Step functions (local +1, -1, 0)|**Edge isolation.** Analyzes local features rather than global ones. Ideal for detecting sudden, sharp transitions in an image.|
+|**Slant Transform**|Sawtooth / discrete linear ramps|**Gradient compression.** Designed to compress images with smooth, linear changes in brightness (e.g., fading skies, smooth shadows).|
+|**Wavelet (DWT)**|Scaled/shifted "mother wavelets"|**Time-frequency localization.** The Fourier transform reveals _what_ frequencies exist; wavelets tell you exactly _where_ in the image they exist (used in JPEG2000).|
