@@ -1,5 +1,4 @@
-
----
+___
 # Chapter 1 — Introduction
 
 ## What an OS Does
@@ -96,7 +95,7 @@
 
 - **Process management**: create/delete processes, suspend/resume, synchronization, communication, deadlock handling.
     - Process = program **in execution** (active entity) vs. program (passive entity).
-    - Single-threaded: 1 program counter; multi-threaded: 1 PC per thread.
+    - Single-threaded: 1 program counter; multi-threaded: 1 pc per thread.
 - **Memory management**: track what's in memory & by whom; decide what moves in/out; allocate/deallocate memory.
 - **File-system management**: uniform logical view of storage (files); organize into directories; access control; create/delete, map onto storage, backups.
 - **Mass-storage management**: mounting/unmounting, free-space mgmt, allocation, disk scheduling, partitioning, protection. **Tertiary storage** (optical, tape) — slower but still needs management.
