@@ -1083,7 +1083,7 @@ Google Chrome uses multiprocess architecture with three process types:
 - Improved stability
 
 ---
-
+---
 ### Section D: Interprocess Communication (IPC)
 
 **Q53: Define independent and cooperating processes, and list reasons for process cooperation.**
