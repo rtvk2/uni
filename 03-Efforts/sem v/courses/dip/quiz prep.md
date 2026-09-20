@@ -25,9 +25,9 @@
 ### Relevant
 - [x] **Q1 (Parts 1, 2*, 3*, 4*):** Spatial filter symmetry, FT of impulse function, band-limited vs. spatial-limited properties, and 2D Fourier rotation property
 - [x] **Q2:** Histogram properties and image spatial arrangement invariance
-- [ ] **Q3*:** Sampling theorem derivation, Nyquist criterion, and frequency domain loss
-- [ ] **Q4*:** Fourier transform of a square pulse and ringing artifacts in ideal low-pass filters (ILPF)
-- [ ] **Q5*:** Expressing DFT as matrix multiplication and DFT linearity
+- [x] **Q3*:** Sampling theorem derivation, Nyquist criterion, and frequency domain loss
+- [x] **Q4*:** Fourier transform of a square pulse and ringing artifacts in ideal low-pass filters (ILPF)
+- [x] **Q5*:** Expressing DFT as matrix multiplication and DFT linearity
 - [x] **Q6:** Spatial high-pass filter kernel structure (center impulse / zero-sum)
 
 > [!warning] Excluded
@@ -39,11 +39,11 @@
 
 ### Relevant
 - [x] **Q1 (Parts 1, 2*, 3*, 4*):** Difference of Gaussians (DoG) approximation, FT of shifted impulse $\delta(t - \tau)$, aliasing reduction techniques, and homomorphic filtering
-- [ ] **Q2*:** Sampling interval condition ($\Delta T > 2/\mu_{\max}$) and frequency domain aliasing corruption
-- [ ] **Q3*:** Derivation of the Fourier shift theorem: $\mathcal{F}\{h(t - \tau)\}$
-- [ ] **Q4*:** Butterworth low-pass filter formula and band-pass filter construction/cutoffs
-- [ ] **Q5*:** Translation/rotation effects on Fourier magnitude vs. phase spectra
-- [ ] **Q6*:** Notch-reject and band-pass filtering practical applications
+- [x] **Q2*:** Sampling interval condition ($\Delta T > 2/\mu_{\max}$) and frequency domain aliasing corruption
+- [x] **Q3*:** Derivation of the Fourier shift theorem: $\mathcal{F}\{h(t - \tau)\}$
+- [x] **Q4*:** Butterworth low-pass filter formula and band-pass filter construction/cutoffs
+- [x] **Q5*:** Translation/rotation effects on Fourier magnitude vs. phase spectra
+- [x] **Q6*:** Notch-reject and band-pass filtering practical applications
 
 > [!warning] Excluded
 > - **Q7 & Q8:** Mathematical morphology (dilation commutativity, opening with 3x3 structuring element)[cite: 2]

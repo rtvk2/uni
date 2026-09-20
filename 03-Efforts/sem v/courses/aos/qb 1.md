@@ -684,7 +684,9 @@ System Calls
 **Answer:**
 - **Early OSes**: Assembly language
 - **Then**: System programming languages like Algol, PL/1
-- **Now**: C, C++ (main body), Systems programs: C, C++, scripting languages (PERL, Python, shell scripts); Lowest levels: Assembly language
+- **Now**: C, C++ (main body)
+- **Systems programs**: C, C++, scripting languages (PERL, Python, shell scripts)
+- **Lowest levels**: Assembly language
 
 **Advantages of high-level languages:**
 - Easier to port to other hardware
@@ -701,16 +703,16 @@ System Calls
 **1. Simple/Monolithic Structure:**
 - Example: MS-DOS, Original UNIX
 - All functionality in a single kernel
-- Large number of functions at one level
 - Limited structuring
 - Everything below system-call interface and above hardware
+- Large number of functions at one level
 
 **2. Layered Structure:**
 - OS divided into layers (levels), each built on lower layers
 - Layer 0: Hardware; Layer N: User interface
 - Each layer uses services of only lower-level layers
 - Benefits: Modularity, easier to maintain
-- Example: The THE operating system (THE is the abv. of uni not literal 'the')
+- Example: The THE operating system
 
 **3. Microkernel Structure:**
 - Moves as much from kernel into user space
@@ -730,16 +732,13 @@ System Calls
 **5. Hybrid Structure:**
 - Combines multiple approaches
 - Linux/Solaris: Monolithic + modular for dynamic loading
-- Windows: Mostly monolithic + microkernel for subsystem personalities; f
-	- The Win32 Subsystem (csrss.exe): The primary Windows personality we use today.
-	- The POSIX Subsystem: A personality designed to run Unix applications.
-	- The OS/2 Subsystem: A personality designed to run IBM OS/2 applications.
+- Windows: Mostly monolithic + microkernel for subsystem personalities
 - Mac OS X: Hybrid, layered (Aqua UI, Cocoa, Mach microkernel + BSD Unix)
 
 ---
 
 **Q38: Describe the structure of UNIX and Linux operating systems.**
- 
+
 **Answer:**
 **UNIX Structure:**
 - Two separable parts:

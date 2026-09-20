@@ -31,21 +31,21 @@ Preprocessing shared by all features:
 
 Final 13 kept features (Cell 10 methods):
 
-| Group / feature | Formula | Why it signals quality (corr with score) |
-|---|---|---|
-| `length_fluency`: `n_words` | `len(words)` | +0.65 strongest. Longer = more developed argument. |
-| `n_sents` | `len(sentences)` | +0.59. More sentences = organisation. |
-| `avg_word_len` | `Σlen(w)/n` | +0.21. Longer words ≈ sophisticated vocab. (`avg_words_per_sent` dropped, −0.065 noise.) |
-| `vocab_richness`: `root_ttr` | `\|V\|/√n` | +0.40. Length-normalised TTR (raw TTR `\|V\|/n` falls mechanically with n; √ stabilises). |
-| `hapax_ratio` | `#{w:count=1}/n` | −0.44. Counter-intuitive: good essays *repeat* topical words (focus) vs scattershot rare words. Pairwise corr <0.4 with siblings → independent signal. |
-| `entropy` | `−Σ p log2 p`, `p=count/n` | +0.51. Even, rich word distribution. |
-| `punctuation`: `comma_ratio` | `count(',')/n×100` | +0.24. Clauses/lists = complex syntax. |
-| `punctuation_diversity` | `\|{ch∈.,;:!?}\|/5` | +0.26. Varied punctuation = nuance. |
-| `lexical`: `char_bigram_diversity` | `\|{adjacent char pairs}\|/n` | −0.65 strongest magnitude, *negative*: denominator n grows faster than bigram inventory saturates in long essays — still discriminative after normalisation. Morphological richness. |
-| `long_word_ratio` | `#{len≥7}/n` | +0.19. Academic/formal diction. |
-| `readability`: `coleman_liau` | `0.0588L−0.296S−15.8`, `L=chars/word×100`, `S=sents/word×100` | +0.22. Grade level; needs only chars/words/sents (no syllables) → robust given `str`-only constraint. |
-| `first_person_ratio` | `#{w∈{i,me,my,mine,myself,we,our,us}}/n` | Monotone 1→6: 0.0195→0.0079. Less "I" = analytical framing. Orthogonal to rest. |
-| `opener_diversity` | `\|{first words}\|/#sents` | −0.23. Low unique-openers ("The/This/I…") = monotonous → low score. |
+| Group / feature                    | Formula                                                       | Why it signals quality (corr with score)                                                                                                                                             |
+| ---------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `length_fluency`: `n_words`        | `len(words)`                                                  | +0.65 strongest. Longer = more developed argument.                                                                                                                                   |
+| `n_sents`                          | `len(sentences)`                                              | +0.59. More sentences = organisation.                                                                                                                                                |
+| `avg_word_len`                     | `Σlen(w)/n`                                                   | +0.21. Longer words ≈ sophisticated vocab. (`avg_words_per_sent` dropped, −0.065 noise.)                                                                                             |
+| `vocab_richness`: `root_ttr`       | `\|V\|/√n`                                                    | +0.40. Length-normalised TTR (raw TTR `\|V\|/n` falls mechanically with n; √ stabilises).                                                                                            |
+| `hapax_ratio`                      | `#{w:count=1}/n`                                              | −0.44. Counter-intuitive: good essays *repeat* topical words (focus) vs scattershot rare words. Pairwise corr <0.4 with siblings → independent signal.                               |
+| `entropy`                          | `−Σ p log2 p`, `p=count/n`                                    | +0.51. Even, rich word distribution.                                                                                                                                                 |
+| `punctuation`: `comma_ratio`       | `count(',')/n×100`                                            | +0.24. Clauses/lists = complex syntax.                                                                                                                                               |
+| `punctuation_diversity`            | `\|{ch∈.,;:!?}\|/5`                                           | +0.26. Varied punctuation = nuance.                                                                                                                                                  |
+| `lexical`: `char_bigram_diversity` | `\|{adjacent char pairs}\|/n`                                 | −0.65 strongest magnitude, *negative*: denominator n grows faster than bigram inventory saturates in long essays — still discriminative after normalisation. Morphological richness. |
+| `long_word_ratio`                  | `#{len≥7}/n`                                                  | +0.19. Academic/formal diction.                                                                                                                                                      |
+| `readability`: `coleman_liau`      | `0.0588L−0.296S−15.8`, `L=chars/word×100`, `S=sents/word×100` | +0.22. Grade level; needs only chars/words/sents (no syllables) → robust given `str`-only constraint.                                                                                |
+| `first_person_ratio`               | `#{w∈{i,me,my,mine,myself,we,our,us}}/n`                      | Monotone 1→6: 0.0195→0.0079. Less "I" = analytical framing. Orthogonal to rest.                                                                                                      |
+| `opener_diversity`                 | `\|{first words}\|/#sents`                                    | −0.23. Low unique-openers ("The/This/I…") = monotonous → low score.                                                                                                                  |
 
 Dropped (Cell 11 + commented Cell 12 `DroppedFeatureExtractor`): rule was **|corr|<~0.1 → noise**, or **redundant (|pairwise|>0.85)**, or **hurts KNN validation MAE**:
 - `compression_ratio` (`1−len(zlib.compress)/len(raw)`) — redundant with `n_words`; `ngram_rep_rate` (trigram repeat rate) 0.12.
